@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinmay Nagap - Front-end Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-accent: #00c6ff;
+            --secondary-accent: #0072ff;
+            --text-light: #e0e0e0;
+            --text-medium: #a0a0a0;
+            --bg-dark: #0a0a14;
+            --bg-medium: #151520;
+            --card-bg: #1e1e2e;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --shadow-dark: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 40px rgba(0, 198, 255, 0.15);
+            --gradient-main: linear-gradient(90deg, var(--primary-accent) 0%, var(--secondary-accent) 100%);
+            --gradient-hover: linear-gradient(90deg, #00aaff 0%, #005bbd 100%);
+            --gradient-subtle: linear-gradient(135deg, rgba(0,198,255,0.1) 0%, rgba(124,58,237,0.1) 100%);
+            --header-bg: rgba(10, 10, 20, 0.95);
+            --glass-bg: rgba(30, 30, 46, 0.3);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Light Mode */
+        body.light-mode {
+            --primary-accent: #0072ff;
+            --secondary-accent: #00c6ff;
+            --text-light: #1a1a2e;
+            --text-medium: #4a4a6a;
+            --bg-dark: #f8fafc;
+            --bg-medium: #edf2f7;
+            --card-bg: #ffffff;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --shadow-dark: 0 20px 60px rgba(0, 0, 0, 0.1);
+            --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-glow: 0 0 40px rgba(0, 114, 255, 0.1);
+            --gradient-main: linear-gradient(90deg, #0072ff 0%, #00c6ff 100%);
+            --gradient-hover: linear-gradient(90deg, #005bbd 0%, #00aaff 100%);
+            --gradient-subtle: linear-gradient(135deg, rgba(0,114,255,0.1) 0%, rgba(0,198,255,0.1) 100%);
+            --header-bg: rgba(248, 250, 252, 0.95);
+            --glass-bg: rgba(255, 255, 255, 0.2);
+            --glass-border: rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            padding-top: 80px;
+        }
+
+        /* Utility Classes */
+        .text-gradient {
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+        }
+
+        /* Header Styles */
+        .header {
+            background: var(--header-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-light);
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--text-light);
+            position: relative;
+            padding-left: 0.5rem;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 60%;
+            background: var(--gradient-main);
+            border-radius: 2px;
+        }
+
+        /* Desktop Navigation */
+        .nav-desktop {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            background: rgba(0, 198, 255, 0.1);
+            border: 1px solid rgba(0, 198, 255, 0.2);
+            font-size: 1.2rem;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 0.7rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(0, 198, 255, 0.2);
+            transform: rotate(15deg);
+            box-shadow: 0 5px 15px rgba(0, 198, 255, 0.3);
+        }
+
+        .nav-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.6rem 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-accent);
+            background: rgba(0, 198, 255, 0.05);
+        }
+
+        .nav-link.active {
+            color: var(--primary-accent);
+            background: rgba(0, 198, 255, 0.1);
+        }
+
+        .nav-link.active::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: var(--gradient-main);
+            border-radius: 2px;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(0, 198, 255, 0.1);
+            border: 1px solid rgba(0, 198, 255, 0.2);
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 0.7rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            width: 48px;
+            height: 48px;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(0, 198, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        /* Mobile Navigation */
+        .nav-mobile {
+            display: none;
+            flex-direction: column;
+            background: var(--header-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-top: 1px solid var(--border-color);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 1rem;
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-dark);
+            border-radius: 0 0 20px 20px;
+        }
+
+        .nav-mobile.active {
+            display: flex;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .nav-link-mobile {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .nav-link-mobile:hover {
+            color: var(--primary-accent);
+            background: rgba(0, 198, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .nav-link-mobile i {
+            width: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 2rem;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 198, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+                var(--bg-dark);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .intro-small {
+            color: var(--text-medium);
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .intro-small::before {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background: var(--gradient-main);
+            display: block;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin: 0;
+            color: var(--text-light);
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .animated-name {
+            display: inline-block;
+            background: linear-gradient(90deg, #00f0ff, #7a5cff, #00c6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: name-slide 8s linear infinite;
+            background-size: 200% 100%;
+            position: relative;
+        }
+
+        .animated-name::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-main);
+            border-radius: 2px;
+            animation: underline-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes name-slide {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes underline-pulse {
+            0%, 100% { opacity: 1; transform: scaleX(1); }
+            50% { opacity: 0.7; transform: scaleX(0.95); }
+        }
+
+        .role {
+            color: var(--text-medium);
+            font-weight: 500;
+            font-size: 1.3rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .role::before, .role::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Profile Section */
+        .profile-wrap {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-figure {
+            width: 380px;
+            height: 380px;
+            border-radius: 30px;
+            display: grid;
+            place-items: center;
+            position: relative;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 
+                var(--shadow-dark),
+                0 0 60px rgba(0,198,255,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .profile-figure::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: var(--gradient-main);
+            border-radius: 32px;
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.3;
+            animation: border-glow 4s ease-in-out infinite;
+        }
+
+        @keyframes border-glow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.5; }
+        }
+
+        .profile-photo {
+            width: 340px;
+            height: 340px;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+            animation: float 6s ease-in-out infinite;
+            transform-origin: center bottom;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.02);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-20px) rotateX(5deg); }
+        }
+
+        /* Hero About */
+        .hero-about {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-main);
+            border-radius: 2px 0 0 2px;
+        }
+
+        .hero-about p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-about p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 1.2rem 2.5rem;
+            background: var(--gradient-main);
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 14px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.1rem;
+            box-shadow: 
+                0 10px 30px rgba(0, 198, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: none;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 20px 50px rgba(0, 198, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-button.cta-outline {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--border-color);
+            box-shadow: none;
+        }
+
+        .cta-button.cta-outline:hover {
+            background: rgba(0, 198, 255, 0.1);
+            border-color: var(--primary-accent);
+            transform: translateY(-5px);
+        }
+
+        /* Let's Connect Section */
+        .connect-section {
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .connect-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: var(--gradient-subtle);
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: var(--gradient-main);
+            border-radius: 3px;
+        }
+
+        .section-subtitle {
+            color: var(--text-medium);
+            font-size: 1.25rem;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto 3rem;
+        }
+
+        .feature-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-main);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .feature-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-glow);
+            border-color: rgba(0, 198, 255, 0.3);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-main);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 30px rgba(0, 198, 255, 0.3);
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .feature-desc {
+            color: var(--text-medium);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .cta-center {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-medium);
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-text {
+            color: var(--text-medium);
+            font-size: 1rem;
+        }
+
+        .footer-text i {
+            color: #ff4757;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 48px;
+            height: 48px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--gradient-main);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header scroll effect */
+        .header.scrolled {
+            height: 70px;
+            box-shadow: var(--shadow-dark);
+            background: var(--header-bg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            .profile-figure {
+                width: 340px;
+                height: 340px;
+            }
+            .profile-photo {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero {
+                padding: 6rem 2rem;
+            }
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+            .hero-left, .hero-right {
+                text-align: center;
+            }
+            .intro-small {
+                justify-content: center;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .role {
+                justify-content: center;
+            }
+            .section-title {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .header {
+                height: 70px;
+            }
+            
+            .nav-desktop {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            .hero {
+                padding: 4rem 1.5rem;
+                min-height: auto;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .animated-name::after {
+                bottom: -8px;
+                height: 3px;
+            }
+            
+            .profile-figure {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .profile-photo {
+                width: 240px;
+                height: 240px;
+            }
+            
+            .hero-about {
+                padding: 2rem;
+            }
+            
+            .hero-about p {
+                font-size: 1.05rem;
+            }
+            
+            .connect-section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-card {
+                padding: 2rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            
+            .cta-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .role {
+                font-size: 1.1rem;
+            }
+            
+            .profile-figure {
+                width: 240px;
+                height: 240px;
+            }
+            
+            .profile-photo {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        /* Animation delays */
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        .fade-in:nth-child(5) { animation-delay: 0.5s; }
+        .fade-in:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo text-gradient">CN</h1>
+                
+                <!-- Desktop Navigation -->
+                <nav class="nav-desktop">
+                    <a href="index.html" class="nav-link active">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="skills.html" class="nav-link">Skills</a>
+                    <a href="projects.html" class="nav-link">Projects</a>
+                    <a href="certificates.html" class="nav-link">Certificates</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars" id="menuIcon"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <nav class="nav-mobile" id="mobileNav">
+                <a href="index.html" class="nav-link-mobile">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="about.html" class="nav-link-mobile">
+                    <i class="fas fa-user"></i> About
+                </a>
+                <a href="skills.html" class="nav-link-mobile">
+                    <i class="fas fa-code"></i> Skills
+                </a>
+                <a href="projects.html" class="nav-link-mobile">
+                    <i class="fas fa-project-diagram"></i> Projects
+                </a>
+                <a href="certificates.html" class="nav-link-mobile">
+                    <i class="fas fa-certificate"></i> Certificates
+                </a>
+                <a href="contact.html" class="nav-link-mobile">
+                    <i class="fas fa-envelope"></i> Contact
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <!-- Left Column: Intro & Profile -->
+                <div class="hero-left fade-in">
+                    <p class="intro-small">Hi, I'm</p>
+                    <h1 class="hero-title">
+                        <span class="animated-name">Chinmay Nagap</span>
+                    </h1>
+                    <p class="role">Frontend Developer</p>
+                    
+                    <div class="profile-wrap">
+                        <figure class="profile-figure">
+                            <img src="images/chinmay.png" alt="Chinmay Nagap" class="profile-photo">
+                        </figure>
+                    </div>
+                    
+                    <div class="hero-buttons">
+                        <a href="projects.html" class="cta-button">
+                            <i class="fas fa-eye"></i> View Projects
+                        </a>
+                        <a href="contact.html" class="cta-button cta-outline">
+                            <i class="fas fa-paper-plane"></i> Contact Me
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column: About -->
+                <div class="hero-right fade-in" style="animation-delay: 0.2s;">
+                    <div class="hero-about">
+                        <p>Hello! I am <strong>Chinmay Nagap</strong>, a passionate Frontend Developer dedicated to crafting immersive digital experiences that blend aesthetics with functionality.</p>
+                        <p>With expertise in modern web technologies, I transform complex ideas into elegant, user-centric interfaces that are both visually stunning and highly performant.</p>
+                        <p>My approach combines clean code principles with creative design thinking, ensuring every project delivers exceptional user experiences while maintaining technical excellence.</p>
+                        <p>Continuously evolving with the latest industry trends, I'm committed to building web solutions that are accessible, responsive, and future-proof.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Connect Section -->
+    <section class="connect-section">
+        <div class="container">
+            <div class="fade-in">
+                <h2 class="section-title">Ready to Collaborate?</h2>
+                <p class="section-subtitle">
+                    I partner with businesses and teams to build modern, responsive, and user-focused web interfaces that drive engagement and deliver results.
+                </p>
+                
+                <div class="features-grid">
+                    <div class="feature-card fade-in" style="animation-delay: 0.2s;">
+                        <div class="feature-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="feature-title">Frontend Development</h3>
+                        <p class="feature-desc">Crafting pixel-perfect, responsive interfaces with modern frameworks and best practices.</p>
+                    </div>
+                    
+                    <div class="feature-card fade-in" style="animation-delay: 0.3s;">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Responsive Design</h3>
+                        <p class="feature-desc">Creating seamless experiences across all devices with mobile-first approach.</p>
+                    </div>
+                    
+                    <div class="feature-card fade-in" style="animation-delay: 0.4s;">
+                        <div class="feature-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="feature-title">Clean Code</h3>
+                        <p class="feature-desc">Writing maintainable, scalable, and well-documented code for long-term success.</p>
+                    </div>
+                </div>
+                
+                <div class="cta-center fade-in" style="animation-delay: 0.5s;">
+                    <a href="contact.html" class="cta-button">
+                        <i class="fas fa-rocket"></i> Start Your Project
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">
+                    &copy; 2025 Chinmay Nagap. All rights reserved. 
+                    Designed with <i class="fas fa-heart"></i> by Chinmay.
+                </p>
+                
+                <div class="social-links">
+                    <a href="https://github.com/Chinmay4353" class="social-link" target="_blank" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/chinmay-nagap-123119284" class="social-link" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="mailto:chinmaynagap@gmail.com" class="social-link" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Check for saved theme preference or default to dark mode
+        const currentTheme = localStorage.getItem('theme') || 'dark-mode';
+        
+        if (currentTheme === 'light-mode') {
+            body.classList.add('light-mode');
+            if (themeToggle) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+
+        // Theme toggle event listener
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                if (body.classList.contains('light-mode')) {
+                    body.classList.remove('light-mode');
+                    localStorage.setItem('theme', 'dark-mode');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                } else {
+                    body.classList.add('light-mode');
+                    localStorage.setItem('theme', 'light-mode');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            });
+        }
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const menuIcon = document.getElementById('menuIcon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            
+            if (mobileNav.classList.contains('active')) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+                document.body.style.overflow = 'hidden';
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('.nav-link-mobile');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.dataset.delay || '0s';
+                    entry.target.style.animationDelay = delay;
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        const fadeElements = document.querySelectorAll('.fade-in');
+        fadeElements.forEach(el => observer.observe(el));
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const isClickInsideHeader = e.target.closest('.header');
+            const isMobileNavActive = mobileNav.classList.contains('active');
+            
+            if (!isClickInsideHeader && isMobileNavActive) {
+                mobileNav.classList.remove('active');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    const headerHeight = document.querySelector('.header').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Set active nav link based on current page
+        function setActiveNav() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navLinksMobile = document.querySelectorAll('.nav-link-mobile');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+            
+            navLinksMobile.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.style.background = 'rgba(0, 198, 255, 0.1)';
+                    link.style.color = 'var(--primary-accent)';
+                }
+            });
+        }
+        
+        // Call on page load
+        setActiveNav();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinmay Nagap - Certificates</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-accent: #00c6ff;
+            --secondary-accent: #0072ff;
+            --text-light: #e0e0e0;
+            --text-medium: #a0a0a0;
+            --bg-dark: #0a0a14;
+            --bg-medium: #151520;
+            --card-bg: #1e1e2e;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --shadow-dark: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 40px rgba(0, 198, 255, 0.15);
+            --gradient-main: linear-gradient(90deg, var(--primary-accent) 0%, var(--secondary-accent) 100%);
+            --gradient-hover: linear-gradient(90deg, #00aaff 0%, #005bbd 100%);
+            --gradient-subtle: linear-gradient(135deg, rgba(0,198,255,0.1) 0%, rgba(124,58,237,0.1) 100%);
+            --header-bg: rgba(10, 10, 20, 0.95);
+            --glass-bg: rgba(30, 30, 46, 0.3);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Light Mode */
+        body.light-mode {
+            --primary-accent: #0072ff;
+            --secondary-accent: #00c6ff;
+            --text-light: #1a1a2e;
+            --text-medium: #4a4a6a;
+            --bg-dark: #f8fafc;
+            --bg-medium: #edf2f7;
+            --card-bg: #ffffff;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --shadow-dark: 0 20px 60px rgba(0, 0, 0, 0.1);
+            --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-glow: 0 0 40px rgba(0, 114, 255, 0.1);
+            --gradient-main: linear-gradient(90deg, #0072ff 0%, #00c6ff 100%);
+            --gradient-hover: linear-gradient(90deg, #005bbd 0%, #00aaff 100%);
+            --gradient-subtle: linear-gradient(135deg, rgba(0,114,255,0.1) 0%, rgba(0,198,255,0.1) 100%);
+            --header-bg: rgba(248, 250, 252, 0.95);
+            --glass-bg: rgba(255, 255, 255, 0.2);
+            --glass-border: rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            padding-top: 80px;
+        }
+
+        /* Utility Classes */
+        .text-gradient {
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+        }
+
+        /* Header Styles */
+        .header {
+            background: var(--header-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-light);
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--text-light);
+            position: relative;
+            padding-left: 0.5rem;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 60%;
+            background: var(--gradient-main);
+            border-radius: 2px;
+        }
+
+        /* Desktop Navigation */
+        .nav-desktop {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            background: rgba(0, 198, 255, 0.1);
+            border: 1px solid rgba(0, 198, 255, 0.2);
+            font-size: 1.2rem;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 0.7rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(0, 198, 255, 0.2);
+            transform: rotate(15deg);
+            box-shadow: 0 5px 15px rgba(0, 198, 255, 0.3);
+        }
+
+        .nav-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.6rem 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-accent);
+            background: rgba(0, 198, 255, 0.05);
+        }
+
+        .nav-link.active {
+            color: var(--primary-accent);
+            background: rgba(0, 198, 255, 0.1);
+        }
+
+        .nav-link.active::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: var(--gradient-main);
+            border-radius: 2px;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(0, 198, 255, 0.1);
+            border: 1px solid rgba(0, 198, 255, 0.2);
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 0.7rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            width: 48px;
+            height: 48px;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(0, 198, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        /* Mobile Navigation */
+        .nav-mobile {
+            display: none;
+            flex-direction: column;
+            background: var(--header-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-top: 1px solid var(--border-color);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 1rem;
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-dark);
+            border-radius: 0 0 20px 20px;
+        }
+
+        .nav-mobile.active {
+            display: flex;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .nav-link-mobile {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .nav-link-mobile:hover {
+            color: var(--primary-accent);
+            background: rgba(0, 198, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .nav-link-mobile i {
+            width: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        /* Hero Section */
+        .certificates-hero {
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 198, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+                var(--bg-dark);
+        }
+
+        .certificates-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: var(--gradient-subtle);
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .animated-name {
+            display: inline-block;
+            background: linear-gradient(90deg, #00f0ff, #7a5cff, #00c6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: name-slide 8s linear infinite;
+            background-size: 200% 100%;
+            position: relative;
+        }
+
+        .animated-name::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-main);
+            border-radius: 2px;
+            animation: underline-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes name-slide {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes underline-pulse {
+            0%, 100% { opacity: 1; transform: scaleX(1); }
+            50% { opacity: 0.7; transform: scaleX(0.95); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-medium);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Certificates Section */
+        .certificates-section {
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-light);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: var(--gradient-main);
+            border-radius: 3px;
+        }
+
+        /* Certificates Grid */
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+        }
+
+        .certificate-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-main);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease-out;
+        }
+
+        .certificate-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-glow);
+            border-color: rgba(0, 198, 255, 0.3);
+        }
+
+        .card-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+        }
+
+        .cert-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .cert-icon::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 23px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .certificate-card:hover .cert-icon {
+            transform: scale(1.1);
+        }
+
+        .certificate-card:hover .cert-icon::after {
+            opacity: 0.3;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+        }
+
+        .cert-icon.blue-purple {
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            box-shadow: 0 10px 30px rgba(0, 198, 255, 0.3);
+        }
+
+        .cert-icon.blue-purple::after {
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+        }
+
+        .cert-icon.red-orange {
+            background: linear-gradient(135deg, #ff4d4d 0%, #f97316 100%);
+            box-shadow: 0 10px 30px rgba(255, 77, 77, 0.3);
+        }
+
+        .cert-icon.red-orange::after {
+            background: linear-gradient(135deg, #ff4d4d 0%, #f97316 100%);
+        }
+
+        .cert-icon.green-emerald {
+            background: linear-gradient(135deg, #00ff9d 0%, #00c6ff 100%);
+            box-shadow: 0 10px 30px rgba(0, 255, 157, 0.3);
+        }
+
+        .cert-icon.green-emerald::after {
+            background: linear-gradient(135deg, #00ff9d 0%, #00c6ff 100%);
+        }
+
+        .cert-icon.purple-pink {
+            background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.3);
+        }
+
+        .cert-icon.purple-pink::after {
+            background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+        }
+
+        .cert-icon.blue-indigo {
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .cert-icon.blue-indigo::after {
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+        }
+
+        .cert-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .cert-badge.internship {
+            color: #00c6ff;
+            background: rgba(0, 198, 255, 0.1);
+            border: 1px solid rgba(0, 198, 255, 0.2);
+        }
+
+        .cert-badge.course {
+            color: #9333ea;
+            background: rgba(147, 51, 234, 0.1);
+            border: 1px solid rgba(147, 51, 234, 0.2);
+        }
+
+        .cert-badge.participation {
+            color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .cert-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-light);
+            line-height: 1.3;
+        }
+
+        .certificate-card:hover .cert-title {
+            color: var(--primary-accent);
+        }
+
+        .cert-issuer {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-accent);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .cert-issuer i {
+            font-size: 0.9rem;
+        }
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .cert-description {
+            color: var(--text-medium);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .skills-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 198, 255, 0.1);
+            color: var(--primary-accent);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .certificate-card:hover .skill-tag {
+            background: rgba(0, 198, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .cert-actions {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .cert-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            background: rgba(0, 198, 255, 0.05);
+            color: var(--primary-accent);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-button:hover {
+            background: rgba(0, 198, 255, 0.15);
+            border-color: rgba(0, 198, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 198, 255, 0.2);
+        }
+
+        .cert-button i {
+            font-size: 1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem;
+            border-radius: 20px;
+            background: var(--gradient-subtle);
+            border: 1px solid var(--glass-border);
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .cta-description {
+            color: var(--text-medium);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 1.2rem 2.5rem;
+            border-radius: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.1rem;
+            min-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button.primary {
+            background: var(--gradient-main);
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 198, 255, 0.3);
+        }
+
+        .cta-button.primary:hover {
+            background: var(--gradient-hover);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(0, 198, 255, 0.4);
+        }
+
+        /* CTA Button Glow Effect */
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-medium);
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-text {
+            color: var(--text-medium);
+            font-size: 1rem;
+        }
+
+        .footer-text i {
+            color: #ff4757;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 48px;
+            height: 48px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--gradient-main);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header scroll effect */
+        .header.scrolled {
+            height: 70px;
+            box-shadow: var(--shadow-dark);
+            background: var(--header-bg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            .certificates-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            .section-title {
+                font-size: 2.5rem;
+            }
+            .cta-title {
+                font-size: 2rem;
+            }
+            .cta-section {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .header {
+                height: 70px;
+            }
+            
+            .nav-desktop {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            .certificates-hero {
+                padding: 5rem 1.5rem 3rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .animated-name::after {
+                bottom: -8px;
+                height: 3px;
+            }
+            
+            .certificates-section {
+                padding: 3rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .certificates-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .certificate-card {
+                padding: 2rem;
+            }
+            
+            .cert-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .cert-title {
+                font-size: 1.4rem;
+            }
+            
+            .cta-section {
+                padding: 1.5rem;
+                margin-top: 2rem;
+            }
+            
+            .cta-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta-description {
+                font-size: 1.1rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .header-top {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .cert-badge {
+                align-self: flex-start;
+            }
+        }
+
+        /* Animation delays */
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        .fade-in:nth-child(5) { animation-delay: 0.5s; }
+        .fade-in:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo text-gradient">CN</h1>
+                
+                <!-- Desktop Navigation -->
+                <nav class="nav-desktop">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="skills.html" class="nav-link">Skills</a>
+                    <a href="projects.html" class="nav-link">Projects</a>
+                    <a href="certificates.html" class="nav-link active">Certificates</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars" id="menuIcon"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <nav class="nav-mobile" id="mobileNav">
+                <a href="index.html" class="nav-link-mobile">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="about.html" class="nav-link-mobile">
+                    <i class="fas fa-user"></i> About
+                </a>
+                <a href="skills.html" class="nav-link-mobile">
+                    <i class="fas fa-code"></i> Skills
+                </a>
+                <a href="projects.html" class="nav-link-mobile">
+                    <i class="fas fa-project-diagram"></i> Projects
+                </a>
+                <a href="certificates.html" class="nav-link-mobile">
+                    <i class="fas fa-certificate"></i> Certificates
+                </a>
+                <a href="contact.html" class="nav-link-mobile">
+                    <i class="fas fa-envelope"></i> Contact
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="certificates-hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1 class="hero-title">
+                    Professional <span class="animated-name">Certifications</span>
+                </h1>
+                <p class="hero-subtitle">
+                    My journey of continuous learning and professional development through various certifications, courses, and achievements.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section class="certificates-section">
+        <div class="container">
+            <h2 class="section-title fade-in">My Certifications</h2>
+            
+            <div class="certificates-grid">
+                <!-- API Documentation Certificate -->
+                <div class="certificate-card fade-in">
+                    <div class="card-header">
+                        <div class="header-top">
+                            <div class="cert-icon blue-purple">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="cert-badge internship">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Internship</span>
+                            </div>
+                        </div>
+                        <h3 class="cert-title">API Documentation Certificate</h3>
+                        <div class="cert-issuer">
+                            <i class="fas fa-building"></i>
+                            <span>Mahindra Finance</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="cert-description">
+                            Completed internship program focusing on API documentation, technical writing, and software development practices.
+                        </p>
+                        <div class="skills-container">
+                            <div class="skills-list">
+                                <span class="skill-tag">API Documentation</span>
+                                <span class="skill-tag">Technical Writing</span>
+                                <span class="skill-tag">Software Development</span>
+                            </div>
+                        </div>
+                        <div class="cert-actions">
+                            <a href="certificates/chinmay-intern.pdf" target="_blank" rel="noopener noreferrer" class="cert-button">
+                                <i class="fas fa-external-link-alt"></i>
+                                View Certificate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agile Manual and Software Testing -->
+                <div class="certificate-card fade-in">
+                    <div class="card-header">
+                        <div class="header-top">
+                            <div class="cert-icon red-orange">
+                                <i class="fas fa-bug"></i>
+                            </div>
+                            <div class="cert-badge course">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>Course</span>
+                            </div>
+                        </div>
+                        <h3 class="cert-title">Agile Manual and Software Testing</h3>
+                        <div class="cert-issuer">
+                            <i class="fas fa-award"></i>
+                            <span>Professional Certification</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="cert-description">
+                            Comprehensive course covering manual testing, Agile methodologies, and quality assurance practices.
+                        </p>
+                        <div class="skills-container">
+                            <div class="skills-list">
+                                <span class="skill-tag">Manual Testing</span>
+                                <span class="skill-tag">Agile Methodology</span>
+                                <span class="skill-tag">QA Practices</span>
+                            </div>
+                        </div>
+                        <div class="cert-actions">
+                            <a href="certificates/Certificate.jpg" target="_blank" rel="noopener noreferrer" class="cert-button">
+                                <i class="fas fa-external-link-alt"></i>
+                                View Certificate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MongoDB Basics -->
+                <div class="certificate-card fade-in">
+                    <div class="card-header">
+                        <div class="header-top">
+                            <div class="cert-icon green-emerald">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="cert-badge course">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>Course</span>
+                            </div>
+                        </div>
+                        <h3 class="cert-title">MongoDB Basics for Students</h3>
+                        <div class="cert-issuer">
+                            <i class="fas fa-award"></i>
+                            <span>Professional Certification</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="cert-description">
+                            Database management and NoSQL database expertise with MongoDB, covering data modeling and operations.
+                        </p>
+                        <div class="skills-container">
+                            <div class="skills-list">
+                                <span class="skill-tag">MongoDB</span>
+                                <span class="skill-tag">NoSQL Database</span>
+                                <span class="skill-tag">Data Modeling</span>
+                            </div>
+                        </div>
+                        <div class="cert-actions">
+                            <a href="certificates/MongoDB.pdf" target="_blank" rel="noopener noreferrer" class="cert-button">
+                                <i class="fas fa-external-link-alt"></i>
+                                View Certificate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Front-end Development CSS -->
+                <div class="certificate-card fade-in">
+                    <div class="card-header">
+                        <div class="header-top">
+                            <div class="cert-icon purple-pink">
+                                <i class="fab fa-css3-alt"></i>
+                            </div>
+                            <div class="cert-badge course">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>Course</span>
+                            </div>
+                        </div>
+                        <h3 class="cert-title">Front-end Development CSS</h3>
+                        <div class="cert-issuer">
+                            <i class="fas fa-award"></i>
+                            <span>Professional Certification</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="cert-description">
+                            Specialized training in advanced CSS techniques, responsive design, and modern front-end development practices.
+                        </p>
+                        <div class="skills-container">
+                            <div class="skills-list">
+                                <span class="skill-tag">Advanced CSS</span>
+                                <span class="skill-tag">Responsive Design</span>
+                                <span class="skill-tag">Front-end Development</span>
+                            </div>
+                        </div>
+                        <div class="cert-actions">
+                            <a href="certificates/frontend.pdf" target="_blank" rel="noopener noreferrer" class="cert-button">
+                                <i class="fas fa-external-link-alt"></i>
+                                View Certificate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CodeByte Hackathon Participation -->
+                <div class="certificate-card fade-in">
+                    <div class="card-header">
+                        <div class="header-top">
+                            <div class="cert-icon blue-indigo">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div class="cert-badge participation">
+                                <i class="fas fa-users"></i>
+                                <span>Participation</span>
+                            </div>
+                        </div>
+                        <h3 class="cert-title">CodeByte Hackathon Participation</h3>
+                        <div class="cert-issuer">
+                            <i class="fas fa-university"></i>
+                            <span>Lokmanya Tilak College of Engineering</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="cert-description">
+                            Successfully participated in the CodeByte Hackathon held on 29th January 2025, hosted by Lokmanya Tilak College of Engineering.
+                        </p>
+                        <div class="skills-container">
+                            <div class="skills-list">
+                                <span class="skill-tag">Hackathon</span>
+                                <span class="skill-tag">Creativity</span>
+                                <span class="skill-tag">Team Participation</span>
+                            </div>
+                        </div>
+                        <div class="cert-actions">
+                            <a href="certificates/codebyte-hackathon.pdf" target="_blank" rel="noopener noreferrer" class="cert-button">
+                                <i class="fas fa-external-link-alt"></i>
+                                View Certificate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pixel Palettes Participation -->
+                <div class="certificate-card fade-in">
+                    <div class="card-header">
+                        <div class="header-top">
+                            <div class="cert-icon blue-indigo">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div class="cert-badge participation">
+                                <i class="fas fa-users"></i>
+                                <span>Participation</span>
+                            </div>
+                        </div>
+                        <h3 class="cert-title">Pixel Palettes - Round 2 Participation</h3>
+                        <div class="cert-issuer">
+                            <i class="fas fa-university"></i>
+                            <span>Manipal University MU, Jaipur</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="cert-description">
+                            Recognized for participating in Round 2 of Pixel Palettes as part of Team Logic Lords, representing Terna Engineering College.
+                        </p>
+                        <div class="skills-container">
+                            <div class="skills-list">
+                                <span class="skill-tag">Teamwork</span>
+                                <span class="skill-tag">Event Participation</span>
+                                <span class="skill-tag">Creative Problem Solving</span>
+                            </div>
+                        </div>
+                        <div class="cert-actions">
+                            <a href="certificates/pixel-palettes.pdf" target="_blank" rel="noopener noreferrer" class="cert-button">
+                                <i class="fas fa-external-link-alt"></i>
+                                View Certificate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="cta-section fade-in">
+                <h2 class="cta-title">Looking for More?</h2>
+                <p class="cta-description">
+                    I'm always learning and expanding my skills. Check out my other sections to see my projects and technical skills.
+                </p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="projects.html" class="cta-button primary">
+                        <i class="fas fa-project-diagram"></i> View Projects
+                    </a>
+                    <a href="skills.html" class="cta-button" style="background: transparent; border: 2px solid var(--border-color); color: var(--text-light);">
+                        <i class="fas fa-code"></i> View Skills
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">
+                    &copy; 2025 Chinmay Nagap. All rights reserved. 
+                    Designed with <i class="fas fa-heart"></i> by Chinmay.
+                </p>
+                
+                <div class="social-links">
+                    <a href="https://github.com/Chinmay4353" class="social-link" target="_blank" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/chinmay-nagap-123119284" class="social-link" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="mailto:chinmaynagap@gmail.com" class="social-link" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Check for saved theme preference or default to dark mode
+        const currentTheme = localStorage.getItem('theme') || 'dark-mode';
+        
+        if (currentTheme === 'light-mode') {
+            body.classList.add('light-mode');
+            if (themeToggle) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+
+        // Theme toggle event listener
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                if (body.classList.contains('light-mode')) {
+                    body.classList.remove('light-mode');
+                    localStorage.setItem('theme', 'dark-mode');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                } else {
+                    body.classList.add('light-mode');
+                    localStorage.setItem('theme', 'light-mode');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            });
+        }
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const menuIcon = document.getElementById('menuIcon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            
+            if (mobileNav.classList.contains('active')) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+                document.body.style.overflow = 'hidden';
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('.nav-link-mobile');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.dataset.delay || '0s';
+                    entry.target.style.animationDelay = delay;
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        const fadeElements = document.querySelectorAll('.fade-in');
+        fadeElements.forEach(el => observer.observe(el));
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const isClickInsideHeader = e.target.closest('.header');
+            const isMobileNavActive = mobileNav.classList.contains('active');
+            
+            if (!isClickInsideHeader && isMobileNavActive) {
+                mobileNav.classList.remove('active');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Set active nav link based on current page
+        function setActiveNav() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navLinksMobile = document.querySelectorAll('.nav-link-mobile');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+            
+            navLinksMobile.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.style.background = 'rgba(0, 198, 255, 0.1)';
+                    link.style.color = 'var(--primary-accent)';
+                }
+            });
+        }
+        
+        // Call on page load
+        setActiveNav();
+    </script>
+</body>
+</html>
