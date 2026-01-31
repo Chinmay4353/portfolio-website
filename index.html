@@ -62,6 +62,7 @@
             overflow-x: hidden;
             scroll-behavior: smooth;
             padding-top: 80px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Utility Classes */
@@ -267,6 +268,61 @@
             font-size: 1.2rem;
         }
 
+        /* Mobile Theme Toggle */
+        .theme-toggle-mobile {
+            background: rgba(0, 198, 255, 0.1);
+            border: 1px solid rgba(0, 198, 255, 0.2);
+            color: var(--text-light);
+            cursor: pointer;
+            font-weight: 500;
+            text-align: left;
+            width: 100%;
+            margin-top: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            border: none;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle-mobile:hover {
+            background: rgba(0, 198, 255, 0.2);
+            color: var(--primary-accent);
+        }
+
+        /* Mobile fixed theme button (backup option) */
+        .mobile-theme-fixed {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .mobile-theme-btn {
+            width: 56px;
+            height: 56px;
+            background: var(--gradient-main);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-theme-btn:hover {
+            transform: scale(1.1);
+        }
+
         /* Hero Section */
         .hero {
             padding: 4rem 2rem;
@@ -275,6 +331,7 @@
             align-items: center;
             position: relative;
             overflow: hidden;
+            transition: background-color 0.3s ease;
         }
 
         .hero::before {
@@ -289,6 +346,7 @@
                 radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
                 var(--bg-dark);
             z-index: -1;
+            transition: background 0.3s ease;
         }
 
         .hero-content {
@@ -315,6 +373,7 @@
             display: flex;
             align-items: center;
             gap: 0.8rem;
+            transition: color 0.3s ease;
         }
 
         .intro-small::before {
@@ -323,6 +382,7 @@
             height: 2px;
             background: var(--gradient-main);
             display: block;
+            transition: background 0.3s ease;
         }
 
         .hero-title {
@@ -332,6 +392,7 @@
             color: var(--text-light);
             line-height: 1.1;
             letter-spacing: -1px;
+            transition: color 0.3s ease;
         }
 
         .animated-name {
@@ -355,6 +416,7 @@
             background: var(--gradient-main);
             border-radius: 2px;
             animation: underline-pulse 3s ease-in-out infinite;
+            transition: background 0.3s ease;
         }
 
         @keyframes name-slide {
@@ -375,6 +437,7 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            transition: color 0.3s ease;
         }
 
         .role::before, .role::after {
@@ -382,6 +445,7 @@
             flex: 1;
             height: 1px;
             background: var(--border-color);
+            transition: background 0.3s ease;
         }
 
         .hero-buttons {
@@ -417,6 +481,7 @@
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             transform-style: preserve-3d;
             perspective: 1000px;
+            transition: all 0.3s ease;
         }
 
         .profile-figure::before {
@@ -429,6 +494,7 @@
             filter: blur(20px);
             opacity: 0.3;
             animation: border-glow 4s ease-in-out infinite;
+            transition: background 0.3s ease;
         }
 
         @keyframes border-glow {
@@ -447,7 +513,7 @@
                 inset 0 1px 0 rgba(255,255,255,0.1);
             animation: float 6s ease-in-out infinite;
             transform-origin: center bottom;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
         .profile-photo:hover {
@@ -470,6 +536,7 @@
             box-shadow: var(--shadow-light);
             position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
         }
 
         .hero-about::before {
@@ -481,6 +548,7 @@
             height: 100%;
             background: var(--gradient-main);
             border-radius: 2px 0 0 2px;
+            transition: background 0.3s ease;
         }
 
         .hero-about p {
@@ -490,6 +558,7 @@
             margin-bottom: 1.5rem;
             position: relative;
             z-index: 1;
+            transition: color 0.3s ease;
         }
 
         .hero-about p:last-child {
@@ -546,6 +615,7 @@
             color: var(--text-light);
             border: 2px solid var(--border-color);
             box-shadow: none;
+            transition: all 0.3s ease;
         }
 
         .cta-button.cta-outline:hover {
@@ -559,6 +629,7 @@
             padding: 6rem 2rem;
             position: relative;
             overflow: hidden;
+            transition: background-color 0.3s ease;
         }
 
         .connect-section::before {
@@ -571,6 +642,7 @@
             background: var(--gradient-subtle);
             opacity: 0.1;
             z-index: -1;
+            transition: background 0.3s ease;
         }
 
         .section-title {
@@ -580,6 +652,7 @@
             margin-bottom: 2rem;
             color: var(--text-light);
             position: relative;
+            transition: color 0.3s ease;
         }
 
         .section-title::after {
@@ -592,6 +665,7 @@
             height: 5px;
             background: var(--gradient-main);
             border-radius: 3px;
+            transition: background 0.3s ease;
         }
 
         .section-subtitle {
@@ -601,6 +675,7 @@
             max-width: 700px;
             margin: 0 auto 3rem;
             line-height: 1.8;
+            transition: color 0.3s ease;
         }
 
         .features-grid {
@@ -659,6 +734,7 @@
             color: white;
             font-size: 1.8rem;
             box-shadow: 0 10px 30px rgba(0, 198, 255, 0.3);
+            transition: background 0.3s ease;
         }
 
         .feature-title {
@@ -666,12 +742,14 @@
             font-weight: 600;
             color: var(--text-light);
             margin-bottom: 1rem;
+            transition: color 0.3s ease;
         }
 
         .feature-desc {
             color: var(--text-medium);
             font-size: 1.05rem;
             line-height: 1.6;
+            transition: color 0.3s ease;
         }
 
         .cta-center {
@@ -684,6 +762,7 @@
             background: var(--bg-medium);
             padding: 3rem 2rem;
             border-top: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
 
         .footer-content {
@@ -699,6 +778,7 @@
         .footer-text {
             color: var(--text-medium);
             font-size: 1rem;
+            transition: color 0.3s ease;
         }
 
         .footer-text i {
@@ -884,6 +964,11 @@
                 padding: 1rem 2rem;
                 font-size: 1rem;
             }
+            
+            /* Show mobile fixed theme button on mobile */
+            .mobile-theme-fixed {
+                display: block;
+            }
         }
 
         @media (max-width: 480px) {
@@ -974,6 +1059,10 @@
                 <a href="contact.html" class="nav-link-mobile">
                     <i class="fas fa-envelope"></i> Contact
                 </a>
+                <!-- Mobile Theme Toggle -->
+                <button class="nav-link-mobile theme-toggle-mobile" id="themeToggleMobile">
+                    <i class="fas fa-moon"></i> <span id="themeText">Dark Mode</span>
+                </button>
             </nav>
         </div>
     </header>
@@ -1087,65 +1176,182 @@
         </div>
     </footer>
 
+    <!-- Mobile fixed theme button (backup) -->
+    <div class="mobile-theme-fixed">
+        <button class="mobile-theme-btn" id="mobileThemeBtn">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
     <script>
         // Theme Toggle Functionality
         const themeToggle = document.getElementById('themeToggle');
+        const themeToggleMobile = document.getElementById('themeToggleMobile');
+        const mobileThemeBtn = document.getElementById('mobileThemeBtn');
+        const themeText = document.getElementById('themeText');
         const body = document.body;
 
         // Check for saved theme preference or default to dark mode
         const currentTheme = localStorage.getItem('theme') || 'dark-mode';
         
-        if (currentTheme === 'light-mode') {
-            body.classList.add('light-mode');
-            if (themeToggle) {
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        // Apply saved theme on page load
+        function applyTheme() {
+            if (currentTheme === 'light-mode') {
+                body.classList.add('light-mode');
+                if (themeToggle) {
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+                if (themeText) {
+                    themeText.textContent = 'Light Mode';
+                }
+                if (themeToggleMobile) {
+                    themeToggleMobile.querySelector('i').className = 'fas fa-sun';
+                }
+                if (mobileThemeBtn) {
+                    mobileThemeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            } else {
+                body.classList.remove('light-mode');
+                if (themeToggle) {
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+                if (themeText) {
+                    themeText.textContent = 'Dark Mode';
+                }
+                if (themeToggleMobile) {
+                    themeToggleMobile.querySelector('i').className = 'fas fa-moon';
+                }
+                if (mobileThemeBtn) {
+                    mobileThemeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+                }
             }
         }
 
-        // Theme toggle event listener
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => {
-                if (body.classList.contains('light-mode')) {
-                    body.classList.remove('light-mode');
-                    localStorage.setItem('theme', 'dark-mode');
+        // Apply theme on page load
+        applyTheme();
+
+        // Theme toggle function
+        function toggleTheme() {
+            if (body.classList.contains('light-mode')) {
+                // Switch to dark mode
+                body.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark-mode');
+                
+                // Update all toggle buttons
+                if (themeToggle) {
                     themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-                } else {
-                    body.classList.add('light-mode');
-                    localStorage.setItem('theme', 'light-mode');
+                }
+                if (themeText) {
+                    themeText.textContent = 'Dark Mode';
+                }
+                if (themeToggleMobile) {
+                    themeToggleMobile.querySelector('i').className = 'fas fa-moon';
+                }
+                if (mobileThemeBtn) {
+                    mobileThemeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            } else {
+                // Switch to light mode
+                body.classList.add('light-mode');
+                localStorage.setItem('theme', 'light-mode');
+                
+                // Update all toggle buttons
+                if (themeToggle) {
                     themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+                if (themeText) {
+                    themeText.textContent = 'Light Mode';
+                }
+                if (themeToggleMobile) {
+                    themeToggleMobile.querySelector('i').className = 'fas fa-sun';
+                }
+                if (mobileThemeBtn) {
+                    mobileThemeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            }
+        }
+
+        // Theme toggle event listeners
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+
+        if (themeToggleMobile) {
+            themeToggleMobile.addEventListener('click', toggleTheme);
+        }
+
+        if (mobileThemeBtn) {
+            mobileThemeBtn.addEventListener('click', toggleTheme);
+        }
+
+        // Set active nav link based on current page
+        function setActiveNav() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navLinksMobile = document.querySelectorAll('.nav-link-mobile');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+            
+            navLinksMobile.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.style.background = 'rgba(0, 198, 255, 0.1)';
+                    link.style.color = 'var(--primary-accent)';
                 }
             });
         }
+        
+        // Call on page load
+        setActiveNav();
 
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileNav = document.getElementById('mobileNav');
         const menuIcon = document.getElementById('menuIcon');
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileNav.classList.toggle('active');
-            
-            if (mobileNav.classList.contains('active')) {
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-times');
-                document.body.style.overflow = 'hidden';
-            } else {
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Close mobile menu when clicking on a link
-        const mobileLinks = document.querySelectorAll('.nav-link-mobile');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNav.classList.remove('active');
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-                document.body.style.overflow = '';
+        if (mobileMenuBtn && mobileNav && menuIcon) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileNav.classList.toggle('active');
+                
+                if (mobileNav.classList.contains('active')) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                    document.body.style.overflow = '';
+                }
             });
-        });
+
+            // Close mobile menu when clicking on a link
+            const mobileLinks = document.querySelectorAll('.nav-link-mobile');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                const isClickInsideHeader = e.target.closest('.header');
+                const isMobileNavActive = mobileNav.classList.contains('active');
+                
+                if (!isClickInsideHeader && isMobileNavActive) {
+                    mobileNav.classList.remove('active');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                    document.body.style.overflow = '';
+                }
+            });
+        }
 
         // Header scroll effect
         window.addEventListener('scroll', () => {
@@ -1177,19 +1383,6 @@
         const fadeElements = document.querySelectorAll('.fade-in');
         fadeElements.forEach(el => observer.observe(el));
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            const isClickInsideHeader = e.target.closest('.header');
-            const isMobileNavActive = mobileNav.classList.contains('active');
-            
-            if (!isClickInsideHeader && isMobileNavActive) {
-                mobileNav.classList.remove('active');
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-                document.body.style.overflow = '';
-            }
-        });
-
         // Add smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1210,29 +1403,9 @@
             });
         });
 
-        // Set active nav link based on current page
-        function setActiveNav() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            const navLinks = document.querySelectorAll('.nav-link');
-            const navLinksMobile = document.querySelectorAll('.nav-link-mobile');
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === currentPage) {
-                    link.classList.add('active');
-                }
-            });
-            
-            navLinksMobile.forEach(link => {
-                if (link.getAttribute('href') === currentPage) {
-                    link.style.background = 'rgba(0, 198, 255, 0.1)';
-                    link.style.color = 'var(--primary-accent)';
-                }
-            });
-        }
-        
-        // Call on page load
-        setActiveNav();
+        // Debug: Check theme status
+        console.log('Current theme:', localStorage.getItem('theme'));
+        console.log('Body has light-mode class:', document.body.classList.contains('light-mode'));
     </script>
 </body>
 </html>
